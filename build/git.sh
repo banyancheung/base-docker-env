@@ -4,7 +4,7 @@ set -e
 # -----------------------------------------------------------------------------
 # Install Git
 # -----------------------------------------------------------------------------
-echo "---------- Install git... ----------" >> build.log
+echo "---------- Install git... ----------" >> /build/build.log
 
 cd ${SRC_DIR}
 apt-get -y remove git
@@ -16,4 +16,4 @@ make configure
 make install
 rm -rf $SRC_DIR/git-2*
 
-echo "---------- Install git...done ----------" >> build.log
+echo "---------- Install git...done ----------" >> /build/build.log

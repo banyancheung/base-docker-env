@@ -4,7 +4,7 @@ set -e
 # -----------------------------------------------------------------------------
 # Install PHP
 # -----------------------------------------------------------------------------
-echo "---------- Installing PHP... ---------- " >> build.log
+echo "---------- Installing PHP... ---------- " >> /build/build.log
 
 mkdir -p /home/worker/php
 wget -q -O php-7.1.16.tar.xz http://hk2.php.net/get/php-7.1.16.tar.xz/from/this/mirror
@@ -61,13 +61,13 @@ rm -rf /home/worker/php/lib/php.ini
 cp -f php.ini-development /home/worker/php/lib/php.ini
 rm -rf /home/worker/src/php*
 
-echo "---------- Install PHP...done. ---------- " > build.log
+echo "---------- Install PHP...done. ---------- " > /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install hiredis
 # -----------------------------------------------------------------------------
 
-echo "---------- Install hiredis... ---------- " >> build.log
+echo "---------- Install hiredis... ---------- " >> /build/build.log
 cd /home/worker/src
 wget -q -O hiredis-0.13.3.tar.gz https://github.com/redis/hiredis/archive/v0.13.3.tar.gz
 tar zxvf hiredis-0.13.3.tar.gz
@@ -77,12 +77,12 @@ make install
 echo "/usr/local/lib" > /etc/ld.so.conf.d/local.conf
 ldconfig
 rm -rf /home/worker/src/hiredis-*
-echo "---------- Install hiredis...done ---------- " >> build.log
+echo "---------- Install hiredis...done ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install yaml and PHP yaml extension
 # -----------------------------------------------------------------------------
-echo "---------- Install PHP yaml extension... ---------- " >> build.log
+echo "---------- Install PHP yaml extension... ---------- " >> /build/build.log
 cd /home/worker/src
 wget -q -O yaml-2.0.2.tgz https://pecl.php.net/get/yaml-2.0.2.tgz
 tar xzf yaml-2.0.2.tgz
@@ -92,13 +92,13 @@ cd yaml-2.0.2
 make >/dev/null
 make install
 rm -rf /home/worker/src/yaml-*
-echo "---------- Install PHP yaml extension...done. ---------- " >> build.log
+echo "---------- Install PHP yaml extension...done. ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install PHP mongodb extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP mongodb extension... ---------- " >> build.log
+echo "---------- Install PHP mongodb extension... ---------- " >> /build/build.log
 cd /home/worker/src
 wget -q -O mongodb-1.4.2.tgz https://pecl.php.net/get/mongodb-1.4.2.tgz
 tar zxf mongodb-1.4.2.tgz
@@ -109,13 +109,13 @@ make clean
 make
 make install
 rm -rf /home/worker/src/mongodb-*
-echo "---------- Install PHP mongodb extension...done. ---------- " >> build.log
+echo "---------- Install PHP mongodb extension...done. ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install PHP redis extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP redis extension... ---------- " >> build.log
+echo "---------- Install PHP redis extension... ---------- " >> /build/build.log
 cd /home/worker/src \
 wget -q -O redis-4.0.1.tgz https://pecl.php.net/get/redis-4.0.1.tgz
 tar zxf redis-4.0.1.tgz
@@ -126,13 +126,13 @@ make clean
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/redis-*
-echo "---------- Install PHP redis extension...done. ---------- " >> build.log
+echo "---------- Install PHP redis extension...done. ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install PHP imagick extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP imagick extension... ---------- " >> build.log
+echo "---------- Install PHP imagick extension... ---------- " >> /build/build.log
 cd /home/worker/src
 wget -q -O imagick-3.4.3.tgz https://pecl.php.net/get/imagick-3.4.3.tgz
 tar zxf imagick-3.4.3.tgz
@@ -143,13 +143,13 @@ make clean
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/imagick-*
-echo "---------- Install PHP imagick extension...done ---------- " >> build.log
+echo "---------- Install PHP imagick extension...done ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install libmemcached using by php-memcached
 # -----------------------------------------------------------------------------
 
-echo "---------- Install libmemcached... ---------- " >> build.log
+echo "---------- Install libmemcached... ---------- " >> /build/build.log
 cd /home/worker/src
 wget -q -O libmemcached-1.0.18.tar.gz https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18.tar.gz
 tar xzf libmemcached-1.0.18.tar.gz
@@ -158,13 +158,13 @@ cd libmemcached-1.0.18
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/libmemcached*
-echo "---------- Install libmemcached...done ---------- " >> build.log
+echo "---------- Install libmemcached...done ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install PHP xdebug extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP xdebug extension... ---------- " >> build.log
+echo "---------- Install PHP xdebug extension... ---------- " >> /build/build.log
 cd /home/worker/src
 wget -q -O xdebug-2.6.0.tgz https://pecl.php.net/get/xdebug-2.6.0.tgz
 tar zxf xdebug-2.6.0.tgz
@@ -175,13 +175,13 @@ make clean
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/xdebug-*
-echo "---------- Install PHP xdebug extension...done ---------- " >> build.log
+echo "---------- Install PHP xdebug extension...done ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install PHP igbinary extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP igbinary extension... ---------- " >> build.log
+echo "---------- Install PHP igbinary extension... ---------- " >> /build/build.log
 cd /home/worker/src
 wget -q -O igbinary-2.0.5.tgz https://pecl.php.net/get/igbinary-2.0.5.tgz
 tar zxf igbinary-2.0.5.tgz
@@ -192,13 +192,13 @@ make clean
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/igbinary-*
-echo "---------- Install PHP igbinary extension...done ---------- " >> build.log
+echo "---------- Install PHP igbinary extension...done ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install PHP memcached extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP memcached extension... ---------- " >> build.log
+echo "---------- Install PHP memcached extension... ---------- " >> /build/build.log
 cd /home/worker/src
 wget -q -O memcached-3.0.4.tgz https://pecl.php.net/get/memcached-3.0.4.tgz
 tar xzf memcached-3.0.4.tgz
@@ -208,13 +208,13 @@ cd memcached-3.0.4
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/memcached-*
-echo "---------- Install PHP memcached extension...done ---------- " >> build.log
+echo "---------- Install PHP memcached extension...done ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install PHP yac extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP yac extension... ---------- " >> build.log
+echo "---------- Install PHP yac extension... ---------- " >> /build/build.log
 cd /home/worker/src
 wget -q -O yac-2.0.2.tgz https://pecl.php.net/get/yac-2.0.2.tgz
 tar zxf yac-2.0.2.tgz
@@ -224,13 +224,13 @@ cd yac-2.0.2
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/yac-*
-echo "---------- Install PHP yac extension...done ---------- " >> build.log
+echo "---------- Install PHP yac extension...done ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install PHP swoole extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP swoole extension... ---------- " >> build.log
+echo "---------- Install PHP swoole extension... ---------- " >> /build/build.log
 swooleVersion = 2.1.3
 cd /home/worker/src
 wget -q -O swoole-${swooleVersion}.tar.gz https://github.com/swoole/swoole-src/archive/v${swooleVersion}.tar.gz
@@ -242,13 +242,13 @@ make clean 1>/dev/null
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/swoole*
-echo "---------- Install PHP swoole extension...done ---------- " >> build.log
+echo "---------- Install PHP swoole extension...done ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install PHP inotify extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP inotify extension... ---------- " >> build.log
+echo "---------- Install PHP inotify extension... ---------- " >> /build/build.log
 cd /home/worker/src
 wget -q -O inotify-2.0.0.tgz https://pecl.php.net/get/inotify-2.0.0.tgz
 tar zxf inotify-2.0.0.tgz
@@ -259,38 +259,38 @@ make clean
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/inotify-*
-echo "---------- Install PHP inotify extension...done ---------- " >> build.log
+echo "---------- Install PHP inotify extension...done ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install phpunit
 # -----------------------------------------------------------------------------
 
-echo "---------- Install phpunit... ---------- " >> build.log
+echo "---------- Install phpunit... ---------- " >> /build/build.log
 cd /home/worker/src
 wget -q -O phpunit.phar https://phar.phpunit.de/phpunit.phar
 mv phpunit.phar /home/worker/php/bin/phpunit
 chmod +x /home/worker/php/bin/phpunit
-echo "---------- Install phpunit...done ---------- " >> build.log
+echo "---------- Install phpunit...done ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install php composer
 # -----------------------------------------------------------------------------
 
-echo "---------- Install php composer... ---------- " >> build.log
+echo "---------- Install php composer... ---------- " >> /build/build.log
 cd /home/worker/src
 curl -sS https://getcomposer.org/installer | /home/worker/php/bin/php
 chmod +x composer.phar
 mv composer.phar /home/worker/php/bin/composer
-echo "---------- Install php composer... ---------- " >> build.log
+echo "---------- Install php composer... ---------- " >> /build/build.log
 
 # -----------------------------------------------------------------------------
 # Install PhpDocumentor
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PhpDocumentor... ---------- " >> build.log
+echo "---------- Install PhpDocumentor... ---------- " >> /build/build.log
 /home/worker/php/bin/pear install -a PhpDocumentor
 cd /home/worker/php
 bin/php bin/composer self-update
 bin/pear install PHP_CodeSniffer-2.3.4
-echo "---------- Install PhpDocumentor...done ---------- " >> build.log
+echo "---------- Install PhpDocumentor...done ---------- " >> /build/build.log
 

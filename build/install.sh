@@ -17,6 +17,6 @@ echo "---------- END BUILD PROCESS----------" > build.log
 
 cat build.log
 # Clean up APT when done.
-apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* ${SRC_DIR}/* 
+apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /home/worker/src/* 
 
 

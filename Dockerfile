@@ -6,10 +6,24 @@ FROM phusion/baseimage:0.10.1
 MAINTAINER banyan.cheung@gmail.com
 
 ADD build /build
-RUN /build/install.sh
 
+RUN echo "---------- START BUILD PROCESS ----------" > /build/build.log
+RUN /build/prepare.sh
+RUN /build/php_7.1.16.sh
+RUN /build/apache_ab.sh
+RUN /build/git.sh
+RUN /build/nginx_1.12.2.sh
+RUN echo "---------- END BUILD PROCESS----------" > /build/build.log
+
+# build log
+RUN cat build.log
+# Clean up APT when done.
+RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /home/worker/src/* 
+
+# add CONFIG
 ADD config /home/worker/
 
+# start up
 RUN mkdir -p /etc/my_init.d
 COPY startup.sh /etc/my_init.d/startup.sh
 RUN chmod +x /etc/my_init.d/startup.sh

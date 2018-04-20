@@ -1,0 +1,29 @@
+#!/bin/sh
+set -e
+
+ln -sf /usr/share/zoneinfo/Asia/Chongqing /etc/localtime
+
+MODULES="php memcached mongodb rabbitmq"
+for i in $MODULES
+do
+mkdir -p /home/worker/data/$i/log
+mkdir -p /home/worker/data/$i/run
+done
+
+mkdir -p /home/worker/data/nginx/logs
+mkdir -p /home/worker/data/www/runtime/xhprof
+# chown
+chown worker.worker /home/worker
+chown worker.worker /home/worker/data
+chown worker.worker /home/worker/data/www
+dotfile=`cd /home/worker && find . -maxdepth 1 -name '*' |sed -e 's#^.$##' -e 's#^.\/##' -e 's#^data$##'`
+datadir=`cd /home/worker/data && find . -maxdepth 1 -name '*' |sed -e 's#^.$##' -e 's#^.\/##' -e 's#^www$##'`
+cd /home/worker && chown -R  worker.worker $dotfile
+cd /home/worker/data && chown -R  worker.worker $datadir
+
+chown root.worker /home/worker/nginx/sbin/nginx
+chmod u+s /home/worker/nginx/sbin/nginx
+
+# start nginx,php-fpm
+/home/worker/php/sbin/php-fpm -F -c /home/worker/php/etc/php-fpm.ini
+/home/worker/nginx/sbin/nginx

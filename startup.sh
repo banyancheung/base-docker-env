@@ -25,5 +25,5 @@ chown root.worker /home/worker/nginx/sbin/nginx
 chmod u+s /home/worker/nginx/sbin/nginx
 
 # start nginx,php-fpm
-/home/worker/php/sbin/php-fpm -F -c /home/worker/php/etc/php-fpm.ini
+/home/worker/php/sbin/php-fpm -c /home/worker/php/etc/php-fpm.ini
 /home/worker/nginx/sbin/nginx

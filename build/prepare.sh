@@ -13,18 +13,16 @@ echo deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted univer
 echo deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse >> /etc/apt/sources.list
 
 apt-get update
-apt-get -y install gcc-4.8 g++-4.8 xz-utils wget tzdata tar make curl libfcgi-dev libfcgi0ldbl libmcrypt-dev libssl-dev libc-client2007e libpng12-dev \
+apt-get -y install gcc g++ xz-utils wget tzdata tar make curl libfcgi-dev libfcgi0ldbl libmcrypt-dev libssl-dev libc-client2007e libpng12-dev \
 libc-client2007e-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng-dev libkrb5-dev libpq-dev libxml2-dev libfreetype6-dev imagemagick \
 libxslt1-dev openssl build-essential libexpat1-dev libgeoip-dev libpcre3-dev rcs zlib1g-dev libwebp-dev pkg-config libldb-dev libldap2-dev autoconf \
-libyaml-dev
+libyaml-dev unzip
 
 # -----------------------------------------------------------------------------
 # Make src dir
 # -----------------------------------------------------------------------------
 
-export HOME=/home/worker
-export SRC_DIR=$HOME/src
-mkdir -p ${SRC_DIR}
+mkdir -p /home/worker/src
 
 # -----------------------------------------------------------------------------
 # Configure, timezone/passwd/networking

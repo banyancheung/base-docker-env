@@ -5,7 +5,7 @@ echo "---------- Install nginx... ----------" >> /build/build.log
 
 nginx_version=1.12.2
 NGINX_INSTALL_DIR=/home/worker/nginx
-
+apt-get -y install unzip
 cd /home/worker/src
 wget -q -O nginx-${nginx_version}.tar.gz http://nginx.org/download/nginx-${nginx_version}.tar.gz
 wget -q -O nginx-http-concat.zip https://github.com/alibaba/nginx-http-concat/archive/master.zip

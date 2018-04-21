@@ -7,18 +7,7 @@ MAINTAINER banyan.cheung@gmail.com
 
 ADD build /build
 
-RUN echo "---------- START BUILD PROCESS ----------" > /build/build.log
-RUN /build/prepare.sh
-RUN /build/php_7.1.16.sh
-RUN /build/apache_ab.sh
-RUN /build/git.sh
-RUN /build/nginx_1.12.2.sh
-RUN echo "---------- END BUILD PROCESS----------" > /build/build.log
-
-# build log
-RUN cat build.log
-# Clean up APT when done.
-RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /home/worker/src/* 
+RUN /build/install.sh
 
 # add CONFIG
 ADD config /home/worker/

@@ -12,7 +12,7 @@ echo "---------- START BUILD PROCESS ----------" > build.log
 ./build/nginx_1.12.2.sh
 
 
-echo "---------- END BUILD PROCESS----------" > build.log
+echo "---------- END BUILD PROCESS----------" >> build.log
 
 cat build.log
 # Clean up APT when done.

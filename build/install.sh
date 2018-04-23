@@ -7,10 +7,9 @@ echo "---------- START BUILD PROCESS ----------" > build.log
 
 ### here is custom shell scripts
 ./build/php_7.1.16.sh
+./build/php_tools.sh
 ./build/apache_ab.sh
-# ./build/git.sh
 ./build/nginx_1.12.2.sh
-
 
 echo "---------- END BUILD PROCESS----------" >> build.log
 

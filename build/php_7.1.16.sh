@@ -4,7 +4,7 @@ set -e
 # Install re2c for PHP
 # -----------------------------------------------------------------------------
 cd /home/worker/src
-wget -q -O re2c-1.0.tar.gz https://excellmedia.dl.sourceforge.net/project/re2c/old/re2c-1.0.tar.gz
+wget -q -O re2c-1.0.tar.gz http://oss.ibos.cn/docker/resource/re2c-1.0.tar.gz
 tar xzf re2c-1.0.tar.gz
 cd re2c-1.0
 ./configure
@@ -95,7 +95,7 @@ echo "---------- Install hiredis...done ---------- " >> /build/build.log
 
 echo "---------- Install libmemcached... ---------- " >> /build/build.log
 cd /home/worker/src
-wget -q -O libmemcached-1.0.18.tar.gz https://launchpad.net/libmemcached/1.0/1.0.18/+download/libmemcached-1.0.18.tar.gz
+wget -q -O libmemcached-1.0.18.tar.gz http://oss.ibos.cn/docker/resource/libmemcached-1.0.18.tar.gz
 tar xzf libmemcached-1.0.18.tar.gz
 cd libmemcached-1.0.18
 ./configure --prefix=/usr/local --with-memcached 1>/dev/null
@@ -158,7 +158,7 @@ echo "---------- Install PHP redis extension...done. ---------- " >> /build/buil
 # Install ImageMagick
 # -----------------------------------------------------------------------------
 cd /home/worker/src
-wget -q -O ImageMagick.tar.gz https://www.imagemagick.org/download/ImageMagick.tar.gz
+wget -q -O ImageMagick.tar.gz http://oss.ibos.cn/docker/resource/ImageMagick.tar.gz
 tar zxf ImageMagick.tar.gz
 rm -rf ImageMagick.tar.gz
 ImageMagickPath=`ls`

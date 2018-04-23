@@ -5,6 +5,10 @@
 FROM phusion/baseimage:0.10.1
 MAINTAINER banyan.cheung@gmail.com
 
+ENV HOME /home/worker
+ENV SRC_DIR $HOME/src
+RUN mkdir -p ${SRC_DIR}
+
 ADD build /build
 
 RUN /build/install.sh

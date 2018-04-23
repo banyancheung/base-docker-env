@@ -7,16 +7,23 @@ set -e
 echo "---------- Preparing APT repositories ----------" >> /build/build.log
 cd /etc/apt
 cp sources.list sources.list.bak
-echo deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted universe multiverse > /etc/apt/sources.list
-echo deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted universe multiverse >> /etc/apt/sources.list
-echo deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted universe multiverse >> /etc/apt/sources.list
-echo deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse >> /etc/apt/sources.list
+
+echo deb http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse > /etc/apt/sources.list
+echo deb http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse >> /etc/apt/sources.list
+echo deb http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse >> /etc/apt/sources.list
+echo deb http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse >> /etc/apt/sources.list
+echo deb http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse >> /etc/apt/sources.list
+echo deb-src http://mirrors.aliyun.com/ubuntu/ trusty main restricted universe multiverse >> /etc/apt/sources.list
+echo deb-src http://mirrors.aliyun.com/ubuntu/ trusty-security main restricted universe multiverse >> /etc/apt/sources.list
+echo deb-src http://mirrors.aliyun.com/ubuntu/ trusty-updates main restricted universe multiverse >> /etc/apt/sources.list
+echo deb-src http://mirrors.aliyun.com/ubuntu/ trusty-proposed main restricted universe multiverse >> /etc/apt/sources.list
+echo deb-src http://mirrors.aliyun.com/ubuntu/ trusty-backports main restricted universe multiverse >> /etc/apt/sources.list
 
 apt-get update
 apt-get -y install gcc g++ xz-utils wget tzdata tar make curl libfcgi-dev libfcgi0ldbl libmcrypt-dev libssl-dev libc-client2007e libpng12-dev \
 libc-client2007e-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng-dev libkrb5-dev libpq-dev libxml2-dev libfreetype6-dev imagemagick \
 libxslt1-dev openssl build-essential libexpat1-dev libgeoip-dev libpcre3-dev rcs zlib1g-dev libwebp-dev pkg-config libldb-dev libldap2-dev autoconf \
-libyaml-dev unzip
+libyaml-dev unzip git
 
 # -----------------------------------------------------------------------------
 # Configure, timezone/passwd/networking

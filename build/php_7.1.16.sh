@@ -64,6 +64,7 @@ ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
        --with-zlib \
        --with-bz2 \
        --with-openssl \
+       --with-mcrypt \
        --with-mhash 
 
 make 1>/dev/null

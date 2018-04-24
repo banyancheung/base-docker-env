@@ -47,12 +47,12 @@ ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
        --enable-sysvmsg \
        --enable-sysvsem \
        --enable-sysvshm \
+       --enable-mysqlnd \
        --with-curl \
        --with-gettext \
        --with-xsl \
        --with-xmlrpc \
        --with-ldap \
-       --enable-mysqlnd \
        --with-mysqli=mysqlnd \
        --with-pdo-mysql=mysqlnd \
        --with-gd \

@@ -3,13 +3,8 @@ set -e
 
 ln -sf /usr/share/zoneinfo/Asia/Chongqing /etc/localtime
 
-MODULES="php memcached mongodb rabbitmq"
-for i in $MODULES
-do
-mkdir -p /home/worker/data/$i/log
-mkdir -p /home/worker/data/$i/run
-done
-
+mkdir -p /home/worker/data/php/run
+mkdir -p /home/worker/data/php/logs
 mkdir -p /home/worker/data/nginx/logs
 mkdir -p /home/worker/data/www/runtime/xhprof
 # chown
@@ -23,7 +18,3 @@ cd /home/worker/data && chown -R  worker.worker $datadir
 
 chown root.worker /home/worker/nginx/sbin/nginx
 chmod u+s /home/worker/nginx/sbin/nginx
-
-# start nginx,php-fpm
-/home/worker/php/sbin/php-fpm -c /home/worker/php/etc/php-fpm.ini
-/home/worker/nginx/sbin/nginx

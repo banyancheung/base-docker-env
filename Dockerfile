@@ -5,8 +5,8 @@
 FROM phusion/baseimage:0.10.1
 MAINTAINER banyan.cheung@gmail.com
 
-ENV HOME /home/worker
-ENV SRC_DIR $HOME/src
+RUN echo /home/worker > /etc/container_environment/HOME
+ENV SRC_DIR /home/worker/src
 RUN mkdir -p ${SRC_DIR}
 
 ADD build /build

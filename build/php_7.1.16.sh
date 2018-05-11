@@ -4,9 +4,9 @@ set -e
 # Install re2c for PHP
 # -----------------------------------------------------------------------------
 cd /home/worker/src
-wget -q -O re2c-1.0.tar.gz http://oss.ibos.cn/docker/resource/re2c-1.0.tar.gz
-tar xzf re2c-1.0.tar.gz
-cd re2c-1.0
+wget -q -O re2c-1.0.3.tar.gz https://github.com/skvadrik/re2c/releases/download/1.0.3/re2c-1.0.3.tar.gz
+tar xzf re2c-1.0.3.tar.gz
+cd re2c-1.0.3
 ./configure
 make
 make install
@@ -285,3 +285,5 @@ make 1>/dev/null
 make install
 rm -rf /home/worker/src/inotify-*
 echo "---------- Install PHP inotify extension...done ---------- " >> /build/build.log
+
+ln -s /home/worker/php/bin/php /usr/local/bin/php

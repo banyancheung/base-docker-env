@@ -18,7 +18,7 @@ ADD config /home/worker/
 
 # start up
 RUN mkdir -p /etc/my_init.d
-COPY startup.sh /etc/my_init.d/startup.sh
-RUN chmod +x /etc/my_init.d/startup.sh
+COPY a-startup.sh /etc/my_init.d/a-startup.sh
+RUN chmod +x /etc/my_init.d/a-startup.sh
 
 CMD ["/sbin/my_init"]

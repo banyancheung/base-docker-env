@@ -14,10 +14,10 @@ echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-backports main rest
 echo deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main restricted universe multiverse >> /etc/apt/sources.list
 
 apt-get update
-apt-get -y install gcc g++ xz-utils wget tzdata tar make curl libfcgi-dev libfcgi0ldbl libmcrypt-dev libssl-dev libc-client2007e libpng12-dev \
+apt-get -y install file gcc g++ xz-utils wget tzdata tar make curl libfcgi-dev libfcgi0ldbl libmcrypt-dev libssl-dev libc-client2007e libpng12-dev \
 libc-client2007e-dev libbz2-dev libcurl4-openssl-dev libjpeg-dev libpng-dev libkrb5-dev libpq-dev libxml2-dev libfreetype6-dev imagemagick \
 libxslt1-dev openssl build-essential libexpat1-dev libgeoip-dev libpcre3-dev rcs zlib1g-dev libwebp-dev pkg-config libldb-dev libldap2-dev autoconf \
-libyaml-dev unzip git
+libyaml-dev unzip
 
 # -----------------------------------------------------------------------------
 # Configure, timezone/passwd/networking

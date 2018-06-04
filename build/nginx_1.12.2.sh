@@ -1,8 +1,6 @@
 #!/bin/bash
 set -e
 
-echo "---------- Install nginx... ----------" >> /build/build.log
-
 nginx_version=1.12.2
 NGINX_INSTALL_DIR=/home/worker/nginx
 apt-get -y install unzip
@@ -33,5 +31,3 @@ cd /home/worker/src/nginx-${nginx_version}
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/nginx-* /home/worker/src/ngx_devel_kit* /home/worker/src/lua-nginx-module* /home/worker/src/LuaJIT*
-
-echo "---------- Install nginx...done ----------" >> /build/build.log

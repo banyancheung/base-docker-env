@@ -15,13 +15,13 @@ rm -rf /home/worker/src/re2c*
 # -----------------------------------------------------------------------------
 # Install PHP
 # -----------------------------------------------------------------------------
-echo "---------- Installing PHP... ---------- " >> /build/build.log
+echo "---------- Installing PHP... ---------- "
 cd /home/worker/src
 mkdir -p /home/worker/php
-wget -q -O php-7.1.16.tar.xz http://oss.ibos.cn/docker/resource/php/php-7.1.16.tar.xz
-xz -d php-7.1.16.tar.xz
-tar -xvf php-7.1.16.tar
-cd php-7.1.16
+wget -q -O php-7.1.18.tar.xz http://oss.ibos.cn/docker/resource/php/php-7.1.18.tar.xz
+xz -d php-7.1.18.tar.xz
+tar -xvf php-7.1.18.tar
+cd php-7.1.18
 
 # fix issue configure: error: Cannot find ldap.h
 ln -s /usr/lib/x86_64-linux-gnu/libldap.so /usr/lib/libldap.so \
@@ -73,13 +73,13 @@ rm -rf /home/worker/php/lib/php.ini
 cp -f php.ini-development /home/worker/php/lib/php.ini
 rm -rf /home/worker/src/php*
 
-echo "---------- Install PHP...done. ---------- " > /build/build.log
+echo "---------- Install PHP...done. ---------- "
 
 # -----------------------------------------------------------------------------
 # Install hiredis
 # -----------------------------------------------------------------------------
 
-echo "---------- Install hiredis... ---------- " >> /build/build.log
+echo "---------- Install hiredis... ---------- "
 cd /home/worker/src
 wget -q -O hiredis-0.13.3.tar.gz http://oss.ibos.cn/docker/resource/hiredis-0.13.3.tar.gz
 tar zxvf hiredis-0.13.3.tar.gz
@@ -88,13 +88,13 @@ make
 make install
 ldconfig
 rm -rf /home/worker/src/hiredis-*
-echo "---------- Install hiredis...done ---------- " >> /build/build.log
+echo "---------- Install hiredis...done ---------- "
 
 # -----------------------------------------------------------------------------
 # Install libmemcached using by php-memcached
 # -----------------------------------------------------------------------------
 
-echo "---------- Install libmemcached... ---------- " >> /build/build.log
+echo "---------- Install libmemcached... ---------- "
 cd /home/worker/src
 wget -q -O libmemcached-1.0.18.tar.gz http://oss.ibos.cn/docker/resource/libmemcached-1.0.18.tar.gz
 tar xzf libmemcached-1.0.18.tar.gz
@@ -103,12 +103,12 @@ cd libmemcached-1.0.18
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/libmemcached*
-echo "---------- Install libmemcached...done ---------- " >> /build/build.log
+echo "---------- Install libmemcached...done ---------- "
 
 # -----------------------------------------------------------------------------
 # Install yaml and PHP yaml extension
 # -----------------------------------------------------------------------------
-echo "---------- Install PHP yaml extension... ---------- " >> /build/build.log
+echo "---------- Install PHP yaml extension... ---------- "
 cd /home/worker/src
 wget -q -O yaml-2.0.2.tgz http://oss.ibos.cn/docker/resource/pecl/yaml-2.0.2.tgz
 tar xzf yaml-2.0.2.tgz
@@ -118,13 +118,13 @@ cd yaml-2.0.2
 make
 make install
 rm -rf /home/worker/src/yaml-*
-echo "---------- Install PHP yaml extension...done. ---------- " >> /build/build.log
+echo "---------- Install PHP yaml extension...done. ---------- "
 
 # -----------------------------------------------------------------------------
 # Install PHP mongodb extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP mongodb extension... ---------- " >> /build/build.log
+echo "---------- Install PHP mongodb extension... ---------- "
 cd /home/worker/src
 wget -q -O mongodb-1.4.2.tgz http://oss.ibos.cn/docker/resource/pecl/mongodb-1.4.2.tgz
 tar zxf mongodb-1.4.2.tgz
@@ -135,13 +135,13 @@ make clean
 make
 make install
 rm -rf /home/worker/src/mongodb-*
-echo "---------- Install PHP mongodb extension...done. ---------- " >> /build/build.log
+echo "---------- Install PHP mongodb extension...done. ---------- "
 
 # -----------------------------------------------------------------------------
 # Install PHP redis extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP redis extension... ---------- " >> /build/build.log
+echo "---------- Install PHP redis extension... ---------- "
 cd /home/worker/src
 wget -q -O redis-4.0.1.tgz http://oss.ibos.cn/docker/resource/pecl/redis-4.0.1.tgz
 tar zxf redis-4.0.1.tgz
@@ -152,7 +152,7 @@ make clean
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/redis-*
-echo "---------- Install PHP redis extension...done. ---------- " >> /build/build.log
+echo "---------- Install PHP redis extension...done. ---------- "
 
 
 # -----------------------------------------------------------------------------
@@ -172,7 +172,7 @@ rm -rf /home/worker/src/ImageMagick*
 # Install PHP imagick extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP imagick extension... ---------- " >> /build/build.log
+echo "---------- Install PHP imagick extension... ---------- "
 cd /home/worker/src
 wget -q -O imagick-3.4.3.tgz http://oss.ibos.cn/docker/resource/pecl/imagick-3.4.3.tgz
 tar zxf imagick-3.4.3.tgz
@@ -183,13 +183,13 @@ make clean
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/imagick-*
-echo "---------- Install PHP imagick extension...done ---------- " >> /build/build.log
+echo "---------- Install PHP imagick extension...done ---------- "
 
 # -----------------------------------------------------------------------------
 # Install PHP xdebug extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP xdebug extension... ---------- " >> /build/build.log
+echo "---------- Install PHP xdebug extension... ---------- "
 cd /home/worker/src
 wget -q -O xdebug-2.6.0.tgz http://oss.ibos.cn/docker/resource/pecl/xdebug-2.6.0.tgz
 tar zxf xdebug-2.6.0.tgz
@@ -200,13 +200,13 @@ make clean
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/xdebug-*
-echo "---------- Install PHP xdebug extension...done ---------- " >> /build/build.log
+echo "---------- Install PHP xdebug extension...done ---------- "
 
 # -----------------------------------------------------------------------------
 # Install PHP igbinary extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP igbinary extension... ---------- " >> /build/build.log
+echo "---------- Install PHP igbinary extension... ---------- "
 cd /home/worker/src
 wget -q -O igbinary-2.0.5.tgz http://oss.ibos.cn/docker/resource/pecl/igbinary-2.0.5.tgz
 tar zxf igbinary-2.0.5.tgz
@@ -217,13 +217,13 @@ make clean
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/igbinary-*
-echo "---------- Install PHP igbinary extension...done ---------- " >> /build/build.log
+echo "---------- Install PHP igbinary extension...done ---------- "
 
 # -----------------------------------------------------------------------------
 # Install PHP memcached extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP memcached extension... ---------- " >> /build/build.log
+echo "---------- Install PHP memcached extension... ---------- "
 cd /home/worker/src
 wget -q -O memcached-3.0.4.tgz http://oss.ibos.cn/docker/resource/pecl/memcached-3.0.4.tgz
 tar xzf memcached-3.0.4.tgz
@@ -233,13 +233,13 @@ cd memcached-3.0.4
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/memcached-*
-echo "---------- Install PHP memcached extension...done ---------- " >> /build/build.log
+echo "---------- Install PHP memcached extension...done ---------- "
 
 # -----------------------------------------------------------------------------
 # Install PHP yac extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP yac extension... ---------- " >> /build/build.log
+echo "---------- Install PHP yac extension... ---------- "
 cd /home/worker/src
 wget -q -O yac-2.0.2.tgz http://oss.ibos.cn/docker/resource/pecl/yac-2.0.2.tgz
 tar zxf yac-2.0.2.tgz
@@ -249,14 +249,14 @@ cd yac-2.0.2
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/yac-*
-echo "---------- Install PHP yac extension...done ---------- " >> /build/build.log
+echo "---------- Install PHP yac extension...done ---------- "
 
 # -----------------------------------------------------------------------------
 # Install PHP swoole extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP swoole extension... ---------- " >> /build/build.log
-swooleVersion=2.1.3
+echo "---------- Install PHP swoole extension... ---------- "
+swooleVersion=2.2.0
 cd /home/worker/src
 wget -q -O swoole-${swooleVersion}.tar.gz http://oss.ibos.cn/docker/resource/swoole-src-${swooleVersion}.tar.gz
 tar zxf swoole-${swooleVersion}.tar.gz
@@ -267,13 +267,13 @@ make clean 1>/dev/null
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/swoole*
-echo "---------- Install PHP swoole extension...done ---------- " >> /build/build.log
+echo "---------- Install PHP swoole extension...done ---------- "
 
 # -----------------------------------------------------------------------------
 # Install PHP inotify extensions
 # -----------------------------------------------------------------------------
 
-echo "---------- Install PHP inotify extension... ---------- " >> /build/build.log
+echo "---------- Install PHP inotify extension... ---------- "
 cd /home/worker/src
 wget -q -O inotify-2.0.0.tgz http://oss.ibos.cn/docker/resource/pecl/inotify-2.0.0.tgz
 tar zxf inotify-2.0.0.tgz
@@ -284,6 +284,6 @@ make clean
 make 1>/dev/null
 make install
 rm -rf /home/worker/src/inotify-*
-echo "---------- Install PHP inotify extension...done ---------- " >> /build/build.log
+echo "---------- Install PHP inotify extension...done ---------- "
 
 ln -s /home/worker/php/bin/php /usr/local/bin/php

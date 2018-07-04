@@ -4,7 +4,7 @@ set -e
 # -----------------------------------------------------------------------------
 # Devel libraries for delelopment tools like php & nginx ...
 # -----------------------------------------------------------------------------
-echo "---------- Preparing APT repositories ----------" >> /build/build.log
+echo "---------- Preparing APT repositories ----------"
 cd /etc/apt
 cp sources.list sources.list.bak
 

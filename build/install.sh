@@ -12,6 +12,7 @@ ln -sf /usr/share/zoneinfo/Asia/Chongqing /etc/localtime
 mkdir -p /home/worker/data/php/run
 mkdir -p /home/worker/data/php/logs
 mkdir -p /home/worker/data/nginx/logs
+mkdir -p /home/worker/data/www
 
 # chown
 chown worker.worker /home/worker

@@ -287,3 +287,7 @@ rm -rf /home/worker/src/inotify-*
 echo "---------- Install PHP inotify extension...done ---------- "
 
 ln -s /home/worker/php/bin/php /usr/local/bin/php
+
+echo "---------- Install Composer... ---------- "
+curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer && composer self-update --clean-backups
+echo "---------- Install Composer...done ---------- "

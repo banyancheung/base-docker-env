@@ -19,4 +19,6 @@ ADD config /home/worker/
 # start up
 RUN mkdir -p /etc/my_init.d
 
+WORKDIR /home/worker/data/www
+
 CMD ["/sbin/my_init"]

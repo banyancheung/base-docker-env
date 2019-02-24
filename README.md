@@ -19,7 +19,7 @@
 
 > 以上这部分内容请移步到 [这里](https://github.com/phusion/baseimage-docker/blob/master/README_ZH_cn_.md) 查看注释。
 
-- re2c-1.0.3
+- re2c-1.1.1
 - php 7.1.26
 - php-swoole-4.2.13
 - php-yaml-2.0.4
@@ -33,7 +33,7 @@
 - php-inotify-2.0.0
 - hiredis-0.14.0
 - libmemcached-1.0.18
-- ImageMagick
+- ImageMagick-7.0.8
 - nginx-1.14.2
 
 以上安装脚本分别在 `build/php.sh` 和 `build/nginx.sh` 中。

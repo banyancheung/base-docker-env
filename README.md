@@ -1,12 +1,12 @@
 # base-docker-env，面向生产和开发环境的LNP基础镜像
 
-这是一份适用于生产和开发环境的 **Dockerfile**。 在 [phuison/baseimage](https://github.com/phusion/baseimage-docker "phusion的baseimage-docker") 的基础上，增加了php、php扩展和nginx的安装脚本, 实现了一键安装LNP及其常用扩展的功能。目前已经在我司的生产环境上并运行良好。日常开发中也是基于此镜像进行的。
+这是一份适用于生产和开发环境的 **Dockerfile**。 在 [phuison/baseimage](https://github.com/phusion/baseimage-docker "phusion的baseimage-docker") 的基础上，增加了php、php扩展和nginx的安装脚本。
 
 ## 镜像内容
 
 此镜像包括如下内容：
 
-- Ubuntu 16.04 LTS
+- Ubuntu 18.04 LTS
 	- A correct init process
 	- syslog-ng	
 	- logrotate
@@ -20,23 +20,23 @@
 > 以上这部分内容请移步到 [这里](https://github.com/phusion/baseimage-docker/blob/master/README_ZH_cn_.md) 查看注释。
 
 - re2c-1.0.3
-- php 7.1.18
-- php-swoole-2.2.0
-- php-yaml-2.0.2
-- php-mongodb-1.4.2
-- php-redis-4.0.1
+- php 7.1.26
+- php-swoole-4.2.13
+- php-yaml-2.0.4
+- php-mongodb-1.5.3
+- php-redis-4.2.0
 - php-imagick-3.4.3
-- php-xdebug-2.6.0
-- php-igbinary-2.0.5
-- php-memcached-3.0.4
-- php-yac-2.0.2
+- php-xdebug-2.6.1
+- php-igbinary-3.0.0
+- php-memcached-3.1.3
+- php-yaf-3.0.7
 - php-inotify-2.0.0
-- hiredis-0.13.3
+- hiredis-0.14.0
 - libmemcached-1.0.18
 - ImageMagick
-- nginx-1.12.2
+- nginx-1.14.2
 
-以上安装脚本分别在 `build/php_7.1.18.sh` 和 `build/nginx_1.12.2.sh` 中。
+以上安装脚本分别在 `build/php.sh` 和 `build/nginx.sh` 中。
 
 APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build/prepare.sh` 中找到。
 
@@ -74,7 +74,7 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 
 下面来看看如何运用在开发环境中：
 
-一个完整的开发环境应当包含数据库、缓存与web服务。该镜像已经包含了nginx，所以我们只需要把其他的服务跑起来即可。这里使用到了 `docker-compose` 把该镜像与其他服务链接起来并运行.
+一个完整的开发环境应当包含数据库、缓存与web服务。该镜像已经包含了nginx，所以我们只需要把其他的服务跑起来即可。这里使用了 `docker-compose` 把该镜像与其他服务链接起来并运行.
 
 我们应该有一个目录专门放这些配置文件，假设有个目录叫 **docker-dev**,它的目录结构大概是这个样子：
 
@@ -102,7 +102,6 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 假设我的业务代码在 `/d/WWW/gamer/game` ,是一个基于yii2的php项目。
 
 先来看 `docker-compose.yml`，注意看注释:
-
 
 	version: '2'
 	services:
@@ -184,28 +183,15 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 在docker-compose.yml文件里，它被映射到了 `/etc/my_init.d/` 目录。在启动容器的时候该目录下的shell文件会按文件名顺序执行。
 该脚本初始化了一个目录，并且启动了 `php-fpm` 和 `nginx` 用于接收访问。
 
-
 最后在docker-compose.yml所在的目录中，命令输入：
 
 	docker-compose -p dev up -d
 
 便启动了所有服务。就是这么简单！最重要的是，它是一个统一的、可维护的、可在团队内普及推广的开发环境！
 
-PS:这个例子的所有代码会在 `example/docker-game-dev` 中。
-
-**请注意：根据自己实际需要，修改docker-compose.yml或其他服务如Mysql，redis的配置项，这只是一个例子，千万不要复制粘贴直接用。**
-
 ## 生产环境的使用
 
-其实如果是小公司，业务量不大并且是单机的话，上面的方法里只需要将配置变量改成生产环境的就能直接用。
-
-但如果：
-
-- 是分布式应用
-- 使用了容器服务（Kubernetes或者swarm）
-- 有CI && CD的需求
-
-就必须把你的业务代码打包成一个镜像了。还是假设项目目录为 /d/WWW/gamer/www, 在该目录下新建一个 `Dockerfile` :
+把你的业务代码打包成一个镜像。假设项目目录为 /d/WWW/gamer/www, 在该目录下新建一个 `Dockerfile` :
 
 	FROM ccr.ccs.tencentyun.com/qyy-base/qyy-php:1.1.0
 	MAINTAINER banyan.cheung@gmail.com
@@ -285,7 +271,5 @@ nginx 安装在 `/home/worker/nginx` 中。conf目录是 `/home/worker/nginx/con
 
 
 定时任务可以写shell放在 `/etc/cron.hourly/`,`/etc/cron.daily/`,`/etc/cron.weekly/`等文件夹中，系统会根据时间自动执行。  `cat /etc/crontab` 可以看到系统自带的定时任务设置。
-
-
 
 希望能帮到你。

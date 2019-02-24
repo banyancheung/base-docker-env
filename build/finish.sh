@@ -1,11 +1,6 @@
 #!/bin/sh
 set -e
 
-./build/prepare.sh
-### here is custom shell scripts
-./build/php_7.1.18.sh
-./build/nginx_1.12.2.sh
-
 ### startup scripts
 ln -sf /usr/share/zoneinfo/Asia/Chongqing /etc/localtime
 

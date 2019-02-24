@@ -1,8 +1,4 @@
-# Use phusion/baseimage as base image. make sure you lock down to a specific version, not to `latest`!
-# See https://github.com/phusion/baseimage-docker/blob/master/Changelog.md for
-# a list of version numbers.
-
-FROM phusion/baseimage:0.10.1
+FROM phusion/baseimage:0.11
 MAINTAINER banyan.cheung@gmail.com
 
 RUN echo /home/worker > /etc/container_environment/HOME
@@ -11,7 +7,10 @@ RUN mkdir -p ${SRC_DIR}
 
 ADD build /build
 
-RUN /build/install.sh
+RUN /build/prepare.sh
+RUN /build/php.sh
+RUN /build/nginx.sh
+RUN /build/finish.sh
 
 # add CONFIG
 ADD config /home/worker/

@@ -2,21 +2,21 @@
 set -e
 
 # Version
-ENV PHPREDIS_VERSION 4.2.0
-ENV MEMCACHED_VERSION 3.1.3
-ENV HIREDIS_VERSION 0.14.0
-ENV SWOOLE_VERSION 4.2.13
-ENV PHP_VERSION 7.1.26
-ENV XDEBUG_VERSION 2.6.1
-ENV RE2C_VERSION 1.1.1
-ENV IGBINARY_VERSION 3.0.0
-ENV YAML_VERSION 2.0.4
-ENV MONGODB_VERSION 1.5.3
-ENV YAF_VERSION 3.0.7
-ENV IMAGEMAGICK_VERSION 7.0.8
-ENV IMAGEMAGICK_EXT_VERSION 3.4.3
-ENV LIBMEMCACHED_VERSION 1.0.18
-ENV IONOTIFY_VERSION 2.0.0
+PHPREDIS_VERSION=4.2.0
+MEMCACHED_VERSION=3.1.3
+HIREDIS_VERSION=0.14.0
+SWOOLE_VERSION=4.2.13
+PHP_VERSION=7.1.26
+XDEBUG_VERSION=2.6.1
+RE2C_VERSION=1.1.1
+IGBINARY_VERSION=3.0.0
+YAML_VERSION=2.0.4
+MONGODB_VERSION=1.5.3
+YAF_VERSION=3.0.7
+IMAGEMAGICK_VERSION=7.0.8
+IMAGEMAGICK_EXT_VERSION=3.4.3
+LIBMEMCACHED_VERSION=1.0.18
+IONOTIFY_VERSION=2.0.0
 
 # -----------------------------------------------------------------------------
 # Install re2c for PHP
@@ -209,7 +209,7 @@ echo "---------- Install PHP yaf extension...done ---------- "
 echo "---------- Install hiredis... ---------- "
 cd /home/worker/src
 wget -q -O hiredis-${HIREDIS_VERSION}.tar.gz https://mrzfiles.oss-cn-shenzhen.aliyuncs.com/resource/hiredis-${HIREDIS_VERSION}.tar.gz
-tar zxvf hiredis-${HIREDIS_VERSION}.tar.gz --strip-components=1
+tar zxf hiredis-${HIREDIS_VERSION}.tar.gz
 cd hiredis-${HIREDIS_VERSION}
 make -j$(nproc)
 make install

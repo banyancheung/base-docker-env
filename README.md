@@ -56,7 +56,7 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 
 如果不想构建，也可以使用我已经打包好的在线仓库。
 
-    docker pull ccr.ccs.tencentyun.com/qyy-base/qyy-php:1.1.0
+    docker pull registry.cn-shenzhen.aliyuncs.com/mrz/php:7.1.26
 
 ### 运行
 

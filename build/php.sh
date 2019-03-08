@@ -17,6 +17,7 @@ IMAGEMAGICK_VERSION=7.0.8
 IMAGEMAGICK_EXT_VERSION=3.4.3
 LIBMEMCACHED_VERSION=1.0.18
 IONOTIFY_VERSION=2.0.0
+EVENT_VERSION=2.4.3
 
 # -----------------------------------------------------------------------------
 # Install re2c for PHP
@@ -283,6 +284,23 @@ make -j$(nproc)
 make install
 rm -rf /home/worker/src/xdebug-*
 echo "---------- Install PHP xdebug extension...done ---------- "
+
+# -----------------------------------------------------------------------------
+# Install PHP event extensions
+# -----------------------------------------------------------------------------
+
+echo "---------- Install PHP event extension... ---------- "
+cd /home/worker/src
+wget -q -O event-${EVENT_VERSION}.tgz http://pecl.php.net/get/event-${EVENT_VERSION}.tgz
+tar zxf event-${EVENT_VERSION}.tgz
+cd event-${EVENT_VERSION}
+/home/worker/php/bin/phpize
+./configure --with-php-config=/home/worker/php/bin/php-config
+make clean
+make -j$(nproc)
+make install
+rm -rf /home/worker/src/event-*
+echo "---------- Install PHP event extension...done ---------- "
 
 # -----------------------------------------------------------------------------
 # Install PHP swoole extensions

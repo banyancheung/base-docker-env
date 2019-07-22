@@ -20,21 +20,23 @@
 > 以上这部分内容请移步到 [这里](https://github.com/phusion/baseimage-docker/blob/master/README_ZH_cn_.md) 查看注释。
 
 - re2c-1.1.1
-- php 7.1.26
-- php-swoole-4.2.13
+- php 7.1.30
+- php-swoole-4.4.1
 - php-yaml-2.0.4
-- php-mongodb-1.5.3
-- php-redis-4.2.0
-- php-imagick-3.4.3
+- php-mongodb-1.5.5
+- php-redis-5.0.0
+- php-imagick-3.4.4
 - php-xdebug-2.6.1
 - php-igbinary-3.0.0
 - php-memcached-3.1.3
-- php-yaf-3.0.7
+- php-yaf-3.0.8
 - php-inotify-2.0.0
+- php-event-2.5.3
+- php-xdebug-2.7.2
 - hiredis-0.14.0
 - libmemcached-1.0.18
 - ImageMagick-7.0.8
-- nginx-1.14.2
+- nginx-1.16.0
 
 以上安装脚本分别在 `build/php.sh` 和 `build/nginx.sh` 中。
 
@@ -56,7 +58,7 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 
 如果不想构建，也可以使用我已经打包好的在线仓库。
 
-    docker pull registry.cn-shenzhen.aliyuncs.com/mrz/php:7.1.26
+    docker pull registry.cn-shenzhen.aliyuncs.com/mrz/php:1.3.0
 
 ### 运行
 
@@ -86,6 +88,7 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 	│  │  ├─mysqld_safe_syslog.cnf  模块函数文件
 	│  │  └─ ...          更多类库目录
 	├─nginx               Nginx配置目录
+	│  ├─conf.d           vhost配置目录
 	│  ├─nginx.conf       要覆盖的nginx.conf
 	├─php                 PHP配置目录
 	│  ├─php-fpm.conf 	  要覆盖的php-fpm conf
@@ -95,13 +98,10 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 	├─redis               缓存配置目录    
 	│  ├─redis.conf       要覆盖的redis.conf
 	├─docker-compose.yml  docker-compose 编排文件
-	├─game.sh               业务启动脚本
-	├─game.conf             业务的web配置
+	├─init.sh               启动脚本
 
 
-假设我的业务代码在 `/d/WWW/gamer/game` ,是一个基于yii2的php项目。
-
-先来看 `docker-compose.yml`，注意看注释:
+看看我的 `docker-compose.yml`，注意看注释:
 
 	version: '2'
 	services:
@@ -110,17 +110,18 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 	    image: ccr.ccs.tencentyun.com/qyy-base/qyy-php:1.1.0
 	    container_name: game
 	    volumes:
-	    - /d/WWW/gamer/game:/home/worker/data/www/game  # 将宿主机的代码目录映射到容器的www目录
+	    - /d/WWW:/home/worker/data/www  # 将宿主机的代码目录映射到容器的www目录
 		# ... 如果有更多的开发中业务代码，一并放到这里并映射到容器 
 	    - ./php/php-fpm.ini:/home/worker/php/etc/php-fpm.ini # 用开发配置覆盖容器里的fpm配置
 	    - ./php/php-fpm.conf:/home/worker/php/etc/php-fpm.conf # 同上
 	    - ./php/php.d/xdebug.ini:/home/worker/php/etc/php.d/xdebug.ini # 开发环境开启xdebug。
 	    - ./nginx/nginx.conf:/home/worker/nginx/conf/nginx.conf # 用开发配置覆盖容器里的nginx配置文件
-	    - ./game.conf:/home/worker/nginx/conf.d/game.conf  # 业务的nginx配置。
-	    - ./game.sh:/etc/my_init.d/game.sh # 业务的启动配置，一般是启动php-fpm和nginx，也可以按需写其他执行脚本
-	    # 如果有更多的业务需要自定义脚本或者web，在这里添加
+ 	    - ./nginx/conf.d:/home/worker/nginx/conf.d #nginx Vhost目录映射
+	    - ./init.sh:/etc/my_init.d/init.sh # 业务的启动配置，一般是启动php-fpm和nginx，也可以按需写其他执行脚本
 	    ports:
 	      - "80:80" 
+	      - "39001:39001"
+	      - "39002:39002"
 	    networks:
 	      - new
 	    depends_on:
@@ -149,13 +150,11 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 	      - new 
 	    container_name: memcached
 	  mysql:
-	    image: registry.cn-hangzhou.aliyuncs.com/qyyteam/mysql:5.6
+    	image: daocloud.io/library/mysql:5.7.20
 	    restart: always
 	    ports:
 	      - "3306:3306"
 	    volumes:
-	      - ./mysql/my.cnf:/etc/mysql/my.cnf
-	      - ./mysql/conf.d:/etc/mysql/conf.d
 	      - /d/server/MySql/data:/var/lib/mysql 
 	      # 左边的目录是我宿主机上的持久化Mysql存储目录，这里换成一个全新的或者已经存在的数据库目录。 
 	    environment:
@@ -171,7 +170,7 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 
 如上所示，我们有php+nginx服务，redis服务、memcached服务，mysql服务。这些服务被编排在一起，合成了一个完整的开发环境。（当然如果你的技术栈不是这样或者版本不对，可以换成自己的。这需要你有点动手能力：） ）
 
-再来看一下 `game.sh` :
+再来看一下 `init.sh` :
 
 	#!/bin/sh
 	set -e
@@ -188,41 +187,6 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 	docker-compose -p dev up -d
 
 便启动了所有服务。就是这么简单！最重要的是，它是一个统一的、可维护的、可在团队内普及推广的开发环境！
-
-## 生产环境的使用
-
-把你的业务代码打包成一个镜像。假设项目目录为 /d/WWW/gamer/www, 在该目录下新建一个 `Dockerfile` :
-
-	FROM ccr.ccs.tencentyun.com/qyy-base/qyy-php:1.1.0
-	MAINTAINER banyan.cheung@gmail.com
-	
-	# source codes
-	RUN mkdir -p /home/worker/data/www/game
-	COPY . /home/worker/data/www/game
-	
-	# startup scripts
-	COPY docker/game.sh /etc/my_init.d/game.sh
-	RUN chmod +x /etc/my_init.d/game.sh
-	
-	# php-fpm configs
-	COPY docker/php-fpm.ini /home/worker/php/etc/php-fpm.ini
-	COPY docker/php-fpm.conf /home/worker/php/etc/php-fpm.conf
-	
-	# logrotate
-	COPY docker/nginx /etc/logrotate.d/nginx
-	COPY docker/php-fpm /etc/logrotate.d/php-fpm
-	RUN chmod 644 /etc/logrotate.d/nginx
-	RUN chmod 644 /etc/logrotate.d/php-fpm
-	
-	EXPOSE 80
-
-这个Dockerfile继承了基础镜像，还做了它独有的其他事情： 
-
-- 将代码Copy进了镜像里的www目录
-- 新增了启动脚本，替换了原有的php-fpm和ini配置
-- 配置了 `logrotate` 每隔一段时间分割nginx和php产生的日志文件
-
-相信你已经举一反三了————每一个独立的业务代码都应该像这样构建属于自己的镜像。构建成功后，就能方便的进行分布式部署和CI && CD了。
 
 ## 一些文件及路径的位置
 

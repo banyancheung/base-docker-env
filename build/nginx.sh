@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-nginx_version=1.14.2
+nginx_version=1.16.0
 NGINX_INSTALL_DIR=/home/worker/nginx
 apt-get -y install unzip
 cd /home/worker/src

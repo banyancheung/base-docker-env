@@ -2,22 +2,22 @@
 set -e
 
 # Version
-PHPREDIS_VERSION=4.2.0
+PHPREDIS_VERSION=5.0.0
 MEMCACHED_VERSION=3.1.3
 HIREDIS_VERSION=0.14.0
-SWOOLE_VERSION=4.2.13
-PHP_VERSION=7.1.26
-XDEBUG_VERSION=2.6.1
+SWOOLE_VERSION=4.4.1
+PHP_VERSION=7.1.30
+XDEBUG_VERSION=2.7.2
 RE2C_VERSION=1.1.1
-IGBINARY_VERSION=3.0.0
+IGBINARY_VERSION=3.0.1
 YAML_VERSION=2.0.4
-MONGODB_VERSION=1.5.3
-YAF_VERSION=3.0.7
+MONGODB_VERSION=1.5.5
+YAF_VERSION=3.0.8
 IMAGEMAGICK_VERSION=7.0.8
-IMAGEMAGICK_EXT_VERSION=3.4.3
+IMAGEMAGICK_EXT_VERSION=3.4.4
 LIBMEMCACHED_VERSION=1.0.18
 IONOTIFY_VERSION=2.0.0
-EVENT_VERSION=2.4.3
+EVENT_VERSION=2.5.3
 
 # -----------------------------------------------------------------------------
 # Install re2c for PHP
@@ -291,7 +291,7 @@ echo "---------- Install PHP xdebug extension...done ---------- "
 
 echo "---------- Install PHP event extension... ---------- "
 cd /home/worker/src
-wget -q -O event-${EVENT_VERSION}.tgz http://pecl.php.net/get/event-${EVENT_VERSION}.tgz
+wget -q -O event-${EVENT_VERSION}.tgz https://mrzfiles.oss-cn-shenzhen.aliyuncs.com/resource/event-${EVENT_VERSION}.tgz
 tar zxf event-${EVENT_VERSION}.tgz
 cd event-${EVENT_VERSION}
 /home/worker/php/bin/phpize

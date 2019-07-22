@@ -323,7 +323,7 @@ ln -s /home/worker/php/bin/php /usr/local/bin/php
 
 echo "---------- Install Composer... ---------- "
 export COMPOSER_HOME=/home/worker/
-wget https://dl.laravel-china.org/composer.phar -O /usr/local/bin/composer
+wget https://getcomposer.org/download/1.8.6/composer.phar -O /usr/local/bin/composer
 chmod a+x /usr/local/bin/composer
-composer config -g repo.packagist composer https://packagist.laravel-china.org
+composer config -g repo.packagist composer https://mirrors.aliyun.com/composer/
 echo "---------- Install Composer...done ---------- "

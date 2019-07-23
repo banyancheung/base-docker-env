@@ -26,7 +26,6 @@
 - php-mongodb-1.5.5
 - php-redis-5.0.0
 - php-imagick-3.4.4
-- php-xdebug-2.6.1
 - php-igbinary-3.0.0
 - php-memcached-3.1.3
 - php-yaf-3.0.8
@@ -107,7 +106,7 @@ APT这块使用了清华大学的ubuntu安装源。 此部分代码可在 `build
 	services:
 	  php:
 	    restart: always
-	    image: ccr.ccs.tencentyun.com/qyy-base/qyy-php:1.1.0
+	    image: registry.cn-shenzhen.aliyuncs.com/mrz/php:1.3.0
 	    container_name: game
 	    volumes:
 	    - /d/WWW:/home/worker/data/www  # 将宿主机的代码目录映射到容器的www目录
